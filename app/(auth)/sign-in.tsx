@@ -1,13 +1,57 @@
-import { router } from 'expo-router'
-import { Button, Text, View } from 'react-native';
+import { Link, router } from 'expo-router';
+import { useState } from 'react';
+import { Alert, Text, View } from 'react-native';
 
-const signIn = () => {
+import CustomButton from '@/components/CustomButton';
+import CustomInput from '@/components/CustomInput';
+
+const SignIn = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [form, setForm] = useState({ email: '', password: '' });
+
+  const submit = async () => {
+    if (!form.email || !form.password) return Alert.alert('Erro', 'Por favor, insira um email e senha válidos.');
+
+    setIsSubmitting(true);
+
+    try {
+      // await SignIn(appwrite);
+
+      Alert.alert('Sucesso', 'Você entrou com sucesso!');
+      router.replace('/');
+    } catch (error: any) {
+      Alert.alert('Erro', error.message || 'Ocorreu um erro ao entrar. Por favor, tente novamente.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
-    <View>
-      <Text>Entrar</Text>
-      <Button title='Sign Up' onPress={() => router.push('/sign-up')} ></Button>
+    <View className="gap-10 bg-white rounded-lg p-5 mt-5">
+      <CustomInput
+        placeholder="Insira seu email"
+        value={form.email}
+        onChangeText={text => setForm(prev => ({ ...prev, email: text }))}
+        label="Email"
+        keyboardType="email-address"
+      />
+      <CustomInput
+        placeholder="Insira sua senha"
+        value={form.password}
+        onChangeText={text => setForm(prev => ({ ...prev, password: text }))}
+        label="Senha"
+        secureTextEntry={true}
+      />
+      <CustomButton title="Entrar" isLoading={isSubmitting} onPress={submit} />
+
+      <View className="flex justify-center mt-5 flex-row gap-2">
+        <Text className="base-regular text-gray-100">Não tem uma conta?</Text>
+        <Link href="/sign-up" className="base-bold text-primary">
+          Criar conta
+        </Link>
+      </View>
     </View>
   );
 };
 
-export default signIn;
+export default SignIn;
