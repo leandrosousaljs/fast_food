@@ -4,20 +4,22 @@ import { Alert, Text, View } from 'react-native';
 
 import CustomButton from '@/components/CustomButton';
 import CustomInput from '@/components/CustomInput';
+import { createUser } from '@/lib/appwrite';
 
 const SignUp = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [form, setForm] = useState({ name: '', email: '', password: '' });
 
   const submit = async () => {
-    if (!form.name ||!form.email || !form.password) return Alert.alert('Erro', 'Por favor, insira um nome, email e senha válidos.');
+    const { name, email, password } = form;
+
+    if (!name || !email || !password) return Alert.alert('Erro', 'Por favor, insira um nome, email e senha válidos.');
 
     setIsSubmitting(true);
 
     try {
-      // await SignUp(appwrite);
+      await createUser({ name, email, password });
 
-      Alert.alert('Sucesso', 'Sua conta foi criada com sucesso!');
       router.replace('/');
     } catch (error: any) {
       Alert.alert('Erro', error.message || 'Ocorreu um erro ao entrar. Por favor, tente novamente.');
