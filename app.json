@@ -39,6 +39,14 @@
             "backgroundColor": "#000000"
           }
         }
+      ],
+      [
+        "@sentry/react-native/expo",
+        {
+          "url": "https://sentry.io/",
+          "project": "ljs-food-ordering",
+          "organization": "leandro-m9"
+        }
       ]
     ],
     "experiments": {

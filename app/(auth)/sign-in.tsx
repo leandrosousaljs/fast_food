@@ -1,6 +1,7 @@
 import { Link, router } from 'expo-router';
 import { useState } from 'react';
 import { Alert, Text, View } from 'react-native';
+import * as Sentry from '@sentry/react-native';
 
 import CustomButton from '@/components/CustomButton';
 import CustomInput from '@/components/CustomInput';
@@ -23,6 +24,7 @@ const SignIn = () => {
       router.replace('/');
     } catch (error: any) {
       Alert.alert('Erro', error.message || 'Ocorreu um erro ao entrar. Por favor, tente novamente.');
+      Sentry.captureEvent(error);
     } finally {
       setIsSubmitting(false);
     }
