@@ -7,6 +7,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import CartButton from '@/components/CartButton';
 import { getCategories, getMenu } from '@/lib/appwrite';
 import useAppwrite from '@/lib/useAppwrite';
+import MenuCard from '@/components/MenuCard'
+import { MenuItem } from '@/type'
 
 const Search = () => {
   const { category, query } = useLocalSearchParams<{ query: string; category: string }>();
@@ -33,7 +35,7 @@ const Search = () => {
 
           return (
             <View className={cn('flex-1 max-w[48%]', !isFirstRightColumnItem ? 'mt-10' : 'mt-0')}>
-              <Text>Menu Card</Text>
+              <MenuCard item={item as MenuItem} />
             </View>
           );
         }}
