@@ -5,10 +5,12 @@ import { FlatList, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import CartButton from '@/components/CartButton';
+import Filter from '@/components/Filter';
+import MenuCard from '@/components/MenuCard';
+import SearchBar from '@/components/SearchBar';
 import { getCategories, getMenu } from '@/lib/appwrite';
 import useAppwrite from '@/lib/useAppwrite';
-import MenuCard from '@/components/MenuCard'
-import { MenuItem } from '@/type'
+import { MenuItem } from '@/type';
 
 const Search = () => {
   const { category, query } = useLocalSearchParams<{ query: string; category: string }>();
@@ -54,8 +56,8 @@ const Search = () => {
               </View>
               <CartButton />
             </View>
-            <Text>Search Input</Text>
-            <Text>Filtro</Text>
+            <SearchBar />
+            <Filter categories={categories!} />
           </View>
         )}
         ListEmptyComponent={() => !loading && <Text>Nenhum resultado encontrado</Text>}
