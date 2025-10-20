@@ -1,13 +1,14 @@
 import cn from 'clsx';
 import { useLocalSearchParams } from 'expo-router';
 import { useEffect } from 'react';
-import { FlatList, Text, View } from 'react-native';
+import { FlatList, Image, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import CartButton from '@/components/CartButton';
 import Filter from '@/components/Filter';
 import MenuCard from '@/components/MenuCard';
 import SearchBar from '@/components/SearchBar';
+import { images } from '@/constants';
 import { getCategories, getMenu } from '@/lib/appwrite';
 import useAppwrite from '@/lib/useAppwrite';
 import { MenuItem } from '@/type';
@@ -50,8 +51,9 @@ const Search = () => {
             <View className="flex-between flex-row w-full">
               <View className="flex-start">
                 <Text className="small-bold uppercase text-primary">Buscar</Text>
-                <View className="flex-start flex-row gap-x-1 mt-0.5">
+                <View className="flex-center flex-row gap-x-1 mt-0.5">
                   <Text className="paragraph-semibold text-dark-100">Encontre sua comida favorita</Text>
+                  <Image source={images.arrowDown} className="size-3" resizeMode="contain" />
                 </View>
               </View>
               <CartButton />
